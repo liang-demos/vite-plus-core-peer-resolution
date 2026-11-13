@@ -6,12 +6,12 @@ This isolates the stable-version change proposed in [vite-plus#3317](https://git
 
 ## Run
 
-Requires Python 3, Node.js 22.18+ (or a newer supported Node release), npm, pnpm, curl, and access to the public npm registry. The recorded run used Node 26.4.0, npm 11.17.0, and pnpm 11.21.0 on macOS arm64. Other versions may behave differently.
+Requires Node.js 22.18+ (or a newer supported Node release), npm, pnpm, tar, and access to the public npm registry. The recorded run used Node 26.4.0, npm 11.17.0, and pnpm 11.21.0 on macOS arm64. Other versions may behave differently.
 
 ```sh
 git clone https://github.com/liang-demos/vite-plus-core-peer-resolution.git
 cd vite-plus-core-peer-resolution
-python3 run.py
+node run.mjs
 ```
 
 The script creates four fresh projects in `.runs/`, installs their dependencies, and prints JSON results. Each project declares only:
@@ -52,6 +52,8 @@ workspace
 
 ## Recorded result
 
+The JavaScript runner was also [verified end to end](results/javascript-rerun.json).
+
 See [the original measured data and conditions](results/macos-arm64.json) and [the end-to-end demo rerun](results/demo-rerun.json). The rerun reproduced the npm sizes exactly and the pnpm resolution behavior; pnpm totals were 123.83 MiB in both cases.
 
 | Package manager | Before: upstream Vite copies | After: upstream Vite copies | Before size | After size |
@@ -74,7 +76,7 @@ pnpm resolved Vitest and the CLI to the same core in both cases. Its before case
 ## Measurement and limits
 
 - `scripts/inspect.mjs` uses `createRequire` from the installed CLI and Vitest locations, then compares the real paths of their resolved `vite/package.json` files.
-- `scripts/measure.py` scans installed package manifests for packages actually named `vite`; the core alias retains its canonical package name.
+- `scripts/measure.mjs` scans installed package manifests for packages actually named `vite`; the core alias retains its canonical package name.
 - Size is the sum of regular-file bytes under `node_modules`, excluding symlinks. It includes installation metadata, excludes caches/stores outside `node_modules`, and is not compressed download size or filesystem allocated blocks. `payloadBytes` additionally excludes selected package-manager metadata files.
 - The recorded `results/` file is historical evidence, not a golden assertion. Transitive semver ranges and the registry can change between runs, and native binary sizes depend on the platform.
 - This experiment validates dependency installation/resolution, not runtime compatibility of a fully rebuilt release. Core runtime files are deliberately unchanged.
