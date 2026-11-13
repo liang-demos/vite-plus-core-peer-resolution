@@ -3,9 +3,11 @@ import { readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { basename, dirname, join, relative, resolve } from 'node:path';
 
 const root = resolve(process.argv[2]);
+const managers = process.argv.slice(3);
+if (!managers.length) managers.push('npm', 'pnpm', 'bun', 'yarn');
 const results = [];
 const metadataFiles = new Set(['.package-lock.json', '.modules.yaml', '.pnpm-workspace-state-v1.json', 'lock.yaml']);
-for (const name of ['npm-before', 'npm-after', 'pnpm-before', 'pnpm-after']) {
+for (const name of managers.flatMap((pm) => [pm + '-before', pm + '-after'])) {
   const project = join(root, name);
   const resolution = JSON.parse(execFileSync(process.execPath, [join(import.meta.dirname, 'inspect.mjs'), project]));
   const expectedCore = name.endsWith('after') ? '8.3.7000' : '1.6.0';

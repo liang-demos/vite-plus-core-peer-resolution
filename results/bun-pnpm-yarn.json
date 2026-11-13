@@ -1,0 +1,86 @@
+{
+  "environment": {
+    "platform": "darwin 25.6.0 arm64",
+    "node": "v26.4.0",
+    "yarn": "4.18.1",
+    "pnpm": "11.21.0",
+    "bun": "1.4.4"
+  },
+  "yarnLinker": "node-modules",
+  "results": [
+    {
+      "case": "pnpm-before",
+      "bytes": 129847772,
+      "payloadBytes": 129771516,
+      "MiB": 123.83248519897461,
+      "upstream": [],
+      "sameVite": true,
+      "core": "1.6.0",
+      "vitestViteName": "@voidzero-dev/vite-plus-core",
+      "vitestViteVersion": "1.6.0",
+      "packages": 81
+    },
+    {
+      "case": "pnpm-after",
+      "bytes": 129847837,
+      "payloadBytes": 129771512,
+      "MiB": 123.83254718780518,
+      "upstream": [],
+      "sameVite": true,
+      "core": "8.3.7000",
+      "vitestViteName": "@voidzero-dev/vite-plus-core",
+      "vitestViteVersion": "8.3.7000",
+      "packages": 81
+    },
+    {
+      "case": "bun-before",
+      "bytes": 151154343,
+      "payloadBytes": 151154343,
+      "MiB": 144.15201473236084,
+      "upstream": [
+        "node_modules/vitest/node_modules/vite/package.json"
+      ],
+      "sameVite": false,
+      "core": "1.6.0",
+      "vitestViteName": "vite",
+      "vitestViteVersion": "8.3.8",
+      "packages": 86
+    },
+    {
+      "case": "bun-after",
+      "bytes": 129615430,
+      "payloadBytes": 129615430,
+      "MiB": 123.61090660095215,
+      "upstream": [],
+      "sameVite": true,
+      "core": "8.3.7000",
+      "vitestViteName": "@voidzero-dev/vite-plus-core",
+      "vitestViteVersion": "8.3.7000",
+      "packages": 81
+    },
+    {
+      "case": "yarn-before",
+      "bytes": 137048720,
+      "payloadBytes": 137048720,
+      "MiB": 130.69984436035156,
+      "upstream": [],
+      "sameVite": true,
+      "core": "1.6.0",
+      "vitestViteName": "@voidzero-dev/vite-plus-core",
+      "vitestViteVersion": "1.6.0",
+      "packages": 98
+    },
+    {
+      "case": "yarn-after",
+      "bytes": 137048726,
+      "payloadBytes": 137048726,
+      "MiB": 130.69985008239746,
+      "upstream": [],
+      "sameVite": true,
+      "core": "8.3.7000",
+      "vitestViteName": "@voidzero-dev/vite-plus-core",
+      "vitestViteVersion": "8.3.7000",
+      "packages": 98
+    }
+  ]
+}

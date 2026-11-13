@@ -6,15 +6,17 @@ This isolates the stable-version change proposed in [vite-plus#3317](https://git
 
 ## Run
 
-Requires Node.js 22.18+ (or a newer supported Node release), npm, pnpm, tar, and access to the public npm registry. The recorded run used Node 26.4.0, npm 11.17.0, and pnpm 11.21.0 on macOS arm64. Other versions may behave differently.
+Requires Node.js 22.18+ (or a newer supported Node release), npm, pnpm, Bun, Yarn 4, tar, and access to the public npm registry. The recorded run used Node 26.4.0, npm 11.17.0, and pnpm 11.21.0 on macOS arm64. Other versions may behave differently.
 
 ```sh
 git clone https://github.com/liang-demos/vite-plus-core-peer-resolution.git
 cd vite-plus-core-peer-resolution
 node run.mjs
+# Or select package managers:
+node run.mjs pnpm bun yarn
 ```
 
-The script creates four fresh projects in `.runs/`, installs their dependencies, and prints JSON results. Each project declares only:
+The script creates two fresh projects per selected package manager (eight by default) in `.runs/`, installs their dependencies, and prints JSON results. Each project declares only:
 
 ```json
 {
@@ -25,7 +27,9 @@ The script creates four fresh projects in `.runs/`, installs their dependencies,
 }
 ```
 
-No overrides, resolutions, or peer suppression rules are added. Installation scripts are disabled. npm caches, pnpm metadata caches, and pnpm stores are separate for each case; pnpm copies package files rather than sharing hardlinks. Run with ordinary/default pnpm settings: custom global peer settings can change the outcome.
+No overrides, resolutions, or peer suppression rules are added. Installation scripts are disabled. npm caches, pnpm metadata caches/stores, Bun caches, and Yarn caches/global folders are separate for each case. pnpm and Bun copy package files rather than sharing hardlinks. Run with ordinary/default pnpm settings: custom global peer settings can change the outcome.
+
+Yarn 4 uses explicit `nodeLinker: node-modules` so the same resolution and size measurement works across package managers; this does not measure Yarn’s default PnP layout. The temporary Yarn project sets `npmMinimalAgeGate: 0` because the synthetic registry metadata has no publication timestamps. Yarn settings follow its [configuration reference](https://yarnpkg.com/configuration/yarnrc), and Bun uses an isolated [package cache](https://bun.sh/docs/pm/global-cache).
 
 The localhost registry stops automatically when the run finishes. Downloaded packages, logs, lockfiles, manifests, resolved paths, and measurements stay under `.runs/` for inspection. No packages are published.
 
@@ -72,6 +76,20 @@ The npm before case additionally installed:
 - `@oxc-project/types@0.156.0`
 
 pnpm resolved Vitest and the CLI to the same core in both cases. Its before case emitted a peer warning; its after case did not. Total file size differed by only 65 bytes.
+
+## Bun, pnpm, and Yarn follow-up
+
+[Recorded results](results/bun-pnpm-yarn.json) on the same macOS arm64 machine:
+
+| Package manager | Before: upstream Vite copies | After: upstream Vite copies | Before size | After size |
+| --- | ---: | ---: | ---: | ---: |
+| Bun 1.4.4 | 1 | 0 | 144.15 MiB | 123.61 MiB |
+| pnpm 11.21.0 | 0 | 0 | 123.83 MiB | 123.83 MiB |
+| Yarn 4.18.1 (node-modules) | 0 | 0 | 130.70 MiB | 130.70 MiB |
+
+Bun resolves Vitest to upstream Vite before alignment and to the CLI's core afterward, saving 21,538,913 bytes (20.54 MiB). pnpm and Yarn share the CLI's core in both cases; their total size changes are +65 bytes and +6 bytes respectively. Both emit peer warnings before alignment and no peer warnings afterward. Bun prints no peer warnings in either case.
+
+Compare each manager against itself: different layouts and dependency resolution can produce different total sizes across managers. These Yarn results cover node-modules only, not PnP or Yarn Classic.
 
 ## Measurement and limits
 
