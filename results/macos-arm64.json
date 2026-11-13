@@ -1,0 +1,78 @@
+{
+  "method": {
+    "platform": "macOS arm64",
+    "node": "26.4.0",
+    "npm": "11.17.0",
+    "pnpm": "11.21.0",
+    "source": "Published vite-plus@1.6.0 and @voidzero-dev/vite-plus-core@1.6.0",
+    "bundledVite": "8.3.7",
+    "vitest": "5.1.0",
+    "method": "Controlled manifest-only simulation of PR stable version alignment, not a full checkout/build comparison. Before core 1.6.0, after core 8.3.7000; CLI exact vite alias updated accordingly. All other package payloads unchanged.",
+    "rootDependencies": {
+      "vite-plus": "1.6.0"
+    },
+    "overrides": false,
+    "ignoreScripts": true,
+    "measurement": "Sum regular file sizes under node_modules, excluding symlinks; caches outside node_modules. MiB = bytes / 1048576.",
+    "allInstallExitCodes": 0,
+    "npmOnlyBeforePackages": [
+      "vite@8.3.8",
+      "rolldown@1.2.19",
+      "@rolldown/binding-darwin-arm64@1.2.19",
+      "@rolldown/pluginutils@1.1.1",
+      "@oxc-project/types@0.156.0"
+    ]
+  },
+  "results": [
+    {
+      "case": "npm-before",
+      "bytes": 151203746,
+      "payloadBytes": 151154343,
+      "MiB": 144.19912910461426,
+      "upstream": [
+        "node_modules/vite/package.json"
+      ],
+      "sameVite": false,
+      "core": "1.6.0",
+      "vitestViteName": "vite",
+      "vitestViteVersion": "8.3.8",
+      "packages": 86
+    },
+    {
+      "case": "npm-after",
+      "bytes": 129660123,
+      "payloadBytes": 129615430,
+      "MiB": 123.6535291671753,
+      "upstream": [],
+      "sameVite": true,
+      "core": "8.3.7000",
+      "vitestViteName": "@voidzero-dev/vite-plus-core",
+      "vitestViteVersion": "8.3.7000",
+      "packages": 81
+    },
+    {
+      "case": "pnpm-before",
+      "bytes": 129833739,
+      "payloadBytes": 129757593,
+      "MiB": 123.81910228729248,
+      "upstream": [],
+      "sameVite": true,
+      "core": "1.6.0",
+      "vitestViteName": "@voidzero-dev/vite-plus-core",
+      "vitestViteVersion": "1.6.0",
+      "packages": 81
+    },
+    {
+      "case": "pnpm-after",
+      "bytes": 129833804,
+      "payloadBytes": 129757589,
+      "MiB": 123.81916427612305,
+      "upstream": [],
+      "sameVite": true,
+      "core": "8.3.7000",
+      "vitestViteName": "@voidzero-dev/vite-plus-core",
+      "vitestViteVersion": "8.3.7000",
+      "packages": 81
+    }
+  ]
+}

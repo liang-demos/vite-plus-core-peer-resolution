@@ -1,0 +1,60 @@
+{
+  "environment": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "npm": "11.17.0",
+    "pnpm": "11.21.0",
+    "node": "v26.4.0"
+  },
+  "results": [
+    {
+      "case": "npm-before",
+      "bytes": 151203746,
+      "payloadBytes": 151154343,
+      "MiB": 144.19912910461426,
+      "upstream": [
+        "node_modules/vite/package.json"
+      ],
+      "sameVite": false,
+      "core": "1.6.0",
+      "vitestViteName": "vite",
+      "vitestViteVersion": "8.3.8",
+      "packages": 86
+    },
+    {
+      "case": "npm-after",
+      "bytes": 129660123,
+      "payloadBytes": 129615430,
+      "MiB": 123.6535291671753,
+      "upstream": [],
+      "sameVite": true,
+      "core": "8.3.7000",
+      "vitestViteName": "@voidzero-dev/vite-plus-core",
+      "vitestViteVersion": "8.3.7000",
+      "packages": 81
+    },
+    {
+      "case": "pnpm-before",
+      "bytes": 129848322,
+      "payloadBytes": 129772062,
+      "MiB": 123.83300971984863,
+      "upstream": [],
+      "sameVite": true,
+      "core": "1.6.0",
+      "vitestViteName": "@voidzero-dev/vite-plus-core",
+      "vitestViteVersion": "1.6.0",
+      "packages": 81
+    },
+    {
+      "case": "pnpm-after",
+      "bytes": 129848387,
+      "payloadBytes": 129772058,
+      "MiB": 123.8330717086792,
+      "upstream": [],
+      "sameVite": true,
+      "core": "8.3.7000",
+      "vitestViteName": "@voidzero-dev/vite-plus-core",
+      "vitestViteVersion": "8.3.7000",
+      "packages": 81
+    }
+  ]
+}
